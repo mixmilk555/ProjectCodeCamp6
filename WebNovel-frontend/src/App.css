@@ -15,20 +15,8 @@ body {
   overflow-x: hidden;
 }
 
-.read-box {
-  border: 0.5px solid rgb(70, 64, 17);
-  border-radius: 10px;
-  background-color: rgb(249, 255, 255);
-  width: 70%;
-  height: 100vh;
-  position: relative;
-  text-align: center;
-  margin-top: 10%;
-  color: rgb(20, 3, 3)
-}
-
-.read-box .textarea2 {
-  font-family: 'Prompt', sans-serif;
+.ck-editor__editable_inline{
+  height: 50vh;
 }
 
 .From-box {
@@ -77,6 +65,20 @@ p {
   margin-left: 20px;
   margin-right: 20px;
   padding: 20px;
+}
+
+.read-box {
+  display: block;
+  position: relative;
+  border: 0.5px solid rgb(70, 64, 17);
+  border-radius: 10px;
+  background-color: rgb(249, 255, 255);
+  width: 70%;
+  height: 100vh;
+  position: relative;
+  text-align: center;
+  margin-top: 10%;
+  color: rgb(20, 3, 3)
 }
 
 /* 

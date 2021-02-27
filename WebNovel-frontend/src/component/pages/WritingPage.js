@@ -1,11 +1,13 @@
-import React from 'react';
-import { Form, Input, Button, Row, Col, Divider, notification } from 'antd';
+import React, { useState } from 'react';
+import { Input, Button, Row, Col, Divider, notification } from 'antd';
 import Title from 'antd/lib/typography/Title';
 import AppHeader2 from './header2'
 import Layout, { Content, Footer, Header } from 'antd/lib/layout/layout';
 import AppFooter from './footer';
 import axios from '../../config/axios'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const layout = {
     labelCol: { xs: 1, sm: 5, md: 4, lg: 5, xl: 4, xxl: 3 },
@@ -13,11 +15,13 @@ const layout = {
 };
 
 function WritingPage(props) {
-    const onFinish = values => {
-        // console.log('Success:', values);
+    const [text, setText] = useState('')
+    const [title, setTitle] = useState('')
+
+    const onFinish = () => {
         const body = {
-            title: values.title,
-            plot: values.plot
+            title: title,
+            plot: text
         }
         axios.post('/novel/createnovel', body)
             .then(() => {
@@ -50,7 +54,7 @@ function WritingPage(props) {
                     </Title>
                                     </Row>
                                     <Divider className="Divider" />
-                                    <Form
+                                    {/* <Form
                                         className="App"
                                         {...layout}
                                         onFinish={onFinish}
@@ -71,6 +75,7 @@ function WritingPage(props) {
                                         >
                                             <Input.TextArea maxLength='450' style={{ height: '20vh' }} />
                                         </Form.Item>
+
                                         <Row justify="center">
                                             <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24} >
                                                 <Button style={{ width: "50%" }} className="Button" type="primary" htmlType="submit">
@@ -78,7 +83,44 @@ function WritingPage(props) {
                                         </Button>
                                             </Col>
                                         </Row>
-                                    </Form>
+                                    </Form> */}
+                                    <div className='Form'>
+                                        <Row style={{ width: '100%' }}>
+                                            <Row style={{ width: '100%' }}>
+                                                <Col span={4}>
+                                                    Title :
+                                                </Col>
+                                                <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
+                                                    <Input name='title' value={title} onChange={(e)=>setTitle(e.target.value)}/>
+                                                </Col>
+                                            </Row>
+                                            <Row >
+                                                <div style={{height:'3em'}}></div>
+                                            </Row>
+                                            <Row style={{ width: '100%' }}>
+                                                <Col span={4}>Stroy :</Col>
+                                                <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20} >
+                                                    <CKEditor
+                                                        editor={ClassicEditor}
+                                                        data={text}
+                                                        onChange={(event, editor) => {
+                                                            const data = editor.getData()
+                                                            setText(data)
+                                                        }}
+                                                    />
+                                                </Col>
+                                            </Row>
+                                        </Row>
+                                        <br />
+                                        <Row justify="center">
+                                            <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24} >
+                                                <Button style={{ width: "50%" }} className="Button" type="primary" htmlType="submit"
+                                                    onClick={() => onFinish()}>
+                                                    Create
+                                        </Button>
+                                            </Col>
+                                        </Row>
+                                    </div>
                                 </div>
                             </Col>
                         </Row>

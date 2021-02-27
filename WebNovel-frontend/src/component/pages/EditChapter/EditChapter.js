@@ -6,11 +6,14 @@ import Layout, { Content, Footer, Header } from 'antd/lib/layout/layout';
 import AppFooter from '../footer';
 import axios from '../../../config/axios';
 import { useParams, withRouter } from 'react-router-dom';
-// import { Editor } from '@tinymce/tinymce-react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import parse from 'html-react-parser';
 
 function EditChapter(props) {
     const [chapterName, setChapterName] = useState([])
     const [input, setInput] = useState();
+    const [text, setText] = useState('')
 
     let { id, chapterId } = useParams();
 
@@ -62,35 +65,23 @@ function EditChapter(props) {
                                         </Title>
                                     </Row>
                                     <Divider className="Divider" />
-                                    {/* <Editor
-                                        apiKey='akdhudnhvns6ykb3fxrew4hueejci6310tmn1foyyu3yyzzn'
-                                        initialValue="<p>This is the initial content of the editor</p>"
-                                        value={input}
-                                        init={{
-                                            height: 500,
-                                            menubar: false,
-                                            plugins: [
-                                                'advlist autolink lists link image charmap print preview anchor',
-                                                'searchreplace visualblocks code fullscreen',
-                                                'insertdatetime media table paste code help wordcount'
-                                            ],
-                                            toolbar:
-                                                'undo redo | formatselect | bold italic backcolor | \
-                                                 alignleft aligncenter alignright alignjustify | \
-                                                 bullist numlist outdent indent | removeformat | help'
+                                    <CKEditor
+                                        editor={ClassicEditor}
+                                        data={input}
+                                        onChange={(event, editor) => {
+                                            const data = editor.getData()
+                                            setText(data)
+                                            setInput(data)
                                         }}
-                                        onEditorChange={handleEditorChange}
-                                        onClick={() => createStory(id, chapterId)}
-                                    /> */}
-                                    <Form onFinish={onFinish}>
-                                        <Form.Item label="Story">
-                                            <TextArea className="textarea" bordered={true} name='description' value={input} style={{ height: '20vh' }}
-                                                onChange={(e) => setInput(e.target.value)} />
-                                        </Form.Item>
-                                        <Button style={{ width: "20%" }} className="Button" type="primary" htmlType="submit" onClick={() => createStory(id, chapterId)}>
-                                            Create
+                                    />
+                                    <br />
+                                    <Button style={{ width: "auto" }} className="Button" type="primary" htmlType="submit" onClick={() => createStory(id, chapterId)}>
+                                        Create
                                         </Button>
-                                    </Form>
+                                    <div>
+                                        <h2><u>ตัวอย่าง เนื้อหาที่แสดง</u></h2>
+                                        <p>{parse(text)}</p>
+                                    </div>
                                 </div>
                             </Col>
                         </Row>

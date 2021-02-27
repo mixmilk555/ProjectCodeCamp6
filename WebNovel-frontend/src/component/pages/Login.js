@@ -77,15 +77,15 @@ function Login(props) {
                                             <Input.Password />
                                         </Form.Item>
                                         <Row justify="space-around">
-                                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6} >
+                                            <Col xs={8} sm={6} md={6} lg={6} xl={6} xxl={6} >
                                                 <Button style={{ width: "100%"}} className="Button" type="primary" htmlType="submit">
                                                     Login
                                         </Button>
                                             </Col>
-                                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6} >
+                                            <Col xs={8} sm={6} md={6} lg={6} xl={6} xxl={6} >
                                                 <Link to='/register'>
                                                     <Button style={{ width: "100%", marginLeft: "2rem" }} className="Button" type="primary">
-                                                        Sing up </Button>
+                                                        Sign up </Button>
                                                 </Link>
                                             </Col>
                                         </Row>

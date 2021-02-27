@@ -7,8 +7,9 @@ import AppFooter from './footer';
 import localStorageService from '../services/localStorageService';
 import axios from '../../config/axios';
 import { useParams, Link } from 'react-router-dom';
+import parse from 'html-react-parser';
 
-const { Text } = Typography;
+const { Text, Title } = Typography;
 
 export default function AllChapter() {
     const [novel, setNovel] = useState([]);
@@ -25,9 +26,9 @@ export default function AllChapter() {
     const fetchAllNovel = async (id) => {
         const httpResponse = await axios.get(`/chapter/titleNovel/${id}`)
         let a = await httpResponse.data.find(item => item.id === +id)
-         setTitle(a)
+        setTitle(a)
     }
-
+    console.log(titleNovel)
     useEffect(() => {
         fetchAllChapter(id)
         fetchAllNovel(id)
@@ -51,8 +52,11 @@ export default function AllChapter() {
                                 <div className="Form" style={{ width: '100%' }}>
                                     <Row justify="center">
                                         <Col>
-                                            <Row justify="center" style={{ fontSize: "1.5em" }} >
-                                                <Text > </Text>
+                                            <Row justify="center"  >
+                                                <Title level={3}><u>{titleNovel.title}</u></Title>
+                                            </Row>
+                                            <Row>
+                                             <p style={{ height: 'auto',fontSize:'0.8rem' }}>{parse(`${titleNovel.plot}`)}</p>
                                             </Row>
                                             <Divider />
                                             <Row justify="center" style={{ width: '100%' }}>

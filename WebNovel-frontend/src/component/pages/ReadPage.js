@@ -7,7 +7,7 @@ import AppFooter from './footer';
 import { useParams, Link } from 'react-router-dom';
 import axios from '../../config/axios';
 import localStorageService from '.././services/localStorageService';
-
+import parse from 'html-react-parser';
 
 export default function ReadPage() {
     let { id, chapterId } = useParams()
@@ -16,7 +16,7 @@ export default function ReadPage() {
     const fetchStory = async (id, chapterId) => {
         const httpResponse = await axios.get(`/chapter/story/${id}/${chapterId}`)
         setStory(httpResponse.data)
-        console.log(httpResponse.data)
+        // console.log(httpResponse.data)
     }
 
     let content = <AppHeader />
@@ -27,7 +27,7 @@ export default function ReadPage() {
     useEffect(() => {
         fetchStory(id, chapterId)
     }, [])
-
+    let a = storyRead.story
     return (
         <div className="main" >
             <Layout className='mainLayout'>
@@ -35,20 +35,25 @@ export default function ReadPage() {
                     {content}
                 </Header>
                 <Content style={{ backgroundColor: "#F5F5DC", width: '100%', display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }} >
-                    <Button type="primary" style={{ width: 'auto' }}><Link to={{ pathname: `/allChapter/${id}` }}>กลับหน้าหลักนิยาย</Link></Button>
-                    <div className='read-box'>
-                        <Row justify="center" style={{ width: '100%', height: '100%' }}>
-                            <Row>
-                                <Col >
-                                    <h3><b> {storyRead.chapterName} </b></h3>
-                                </Col>
-                            </Row>
-                            <Row style={{ width: '100%', height: '90%', justifyContent: 'center' }}>
-                                <Col span={20}>
-                                    <Input.TextArea className='textarea2' value={storyRead.story} style={{ height: '100%'}} />
-                                </Col>
-                            </Row>
+
+                    <div className='From-box'>
+                        <Row justify='start' style={{marginLeft:'5%'}}>
+                            <Button type="primary" style={{ width: 'auto' }}><Link to={{ pathname: `/allChapter/${id}` }}>กลับหน้าหลักนิยาย</Link></Button>
                         </Row>
+                        <div className='Form'>
+                            <Row justify="center" style={{ width: '100%', height: '100%' }}>
+                                <Row>
+                                    <Col >
+                                        <h3><b> {storyRead.chapterName} </b></h3>
+                                    </Col>
+                                </Row>
+                                <Row style={{ width: '100%', height: '90%', justifyContent: 'center' }}>
+                                    <Col span={20} >
+                                        <p style={{ display: 'block', height: 'auto' }}>{parse(`${storyRead.story}`)}</p>
+                                    </Col>
+                                </Row>
+                            </Row>
+                        </div>
                     </div>
                 </Content>
                 <Footer>

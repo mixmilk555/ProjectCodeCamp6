@@ -24,14 +24,14 @@ function Register(props) {
                 await axios.post('/user/register', body)
                 {
                     notification.success({
-                        message: `User${values.email}ได้สมัครเรียบร้อยแล้ว`
+                        message: `User : ${values.email} ได้สมัครเรียบร้อยแล้ว`
                     })
                 }
                 props.history.push('/login')
             } catch (err) {
                 {
                     notification.error({
-                        message: `สมัครสมาชิกล้มเหลว`
+                        message: `Username นี้มีผู้อื่นใช้งานแล้ว`
                     })
                 }
             }
