@@ -18,7 +18,10 @@ const getRandomNovel = async (req, res) => {
         function random_item(items) {
             return items[Math.floor(Math.random() * items.length)];
         }
-        const allNovel = await db.Novel.findAll({ where: { id: random_item(a) } });
+        const allNovel1 = await db.Novel.findAll({ where: { id: random_item(a) } });
+        const allNovel2 = await db.Novel.findAll({ where: { id: random_item(a) } });
+        const allNovel3 = await db.Novel.findAll({ where: { id: random_item(a) } });
+        const allNovel = [...allNovel1,...allNovel2,...allNovel3]
         res.status(200).send(allNovel)
     } catch (err) {
         res.status(404).send("Error" + err)

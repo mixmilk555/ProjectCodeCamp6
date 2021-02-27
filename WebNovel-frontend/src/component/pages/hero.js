@@ -3,6 +3,8 @@ import { Button } from 'antd';
 import { Carousel } from 'antd';
 import axios from '../../config/axios';
 import { Link } from 'react-router-dom';
+import parse from 'html-react-parser';
+
 function AppHero() {
   const [novel, setNovel] = useState([]);
 
@@ -23,7 +25,7 @@ function AppHero() {
             <div key={item.id} className="container-fluid">
               <div className="content">
                 <h3>{item.title}</h3>
-                <p>{item.plot}</p>
+                <p>{parse(item.plot)}</p>
                 <div className="btnHolder">
                   <Button type="primary" size="large" ><Link to={{pathname: `/allChapter/${item.id}`}}>Read more</Link></Button>
                 </div>
