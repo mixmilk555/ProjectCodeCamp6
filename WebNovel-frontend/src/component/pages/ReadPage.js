@@ -34,7 +34,7 @@ export default function ReadPage() {
                 <Header>
                     {content}
                 </Header>
-                <Content style={{ backgroundColor: "#F5F5DC", width: '100%', display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }} >
+                <Content style={{ backgroundColor: "#F5F5DC", width: '100%', display: 'flex', justifyContent: 'center', flexWrap: 'wrap' ,height:'100%' }} >
 
                     <div className='From-box'>
                         <Row justify='start' style={{marginLeft:'5%'}}>
@@ -43,13 +43,13 @@ export default function ReadPage() {
                         <div className='Form'>
                             <Row justify="center" style={{ width: '100%', height: '100%' }}>
                                 <Row>
-                                    <Col >
+                                    <Col span={24}>
                                         <h3><b> {storyRead.chapterName} </b></h3>
                                     </Col>
                                 </Row>
                                 <Row style={{ width: '100%', height: '90%', justifyContent: 'center' }}>
                                     <Col span={20} >
-                                        <p style={{ display: 'block', height: 'auto' }}>{parse(`${storyRead.story}`)}</p>
+                                        <p>{parse(`${storyRead.story}`)}</p>
                                     </Col>
                                 </Row>
                             </Row>

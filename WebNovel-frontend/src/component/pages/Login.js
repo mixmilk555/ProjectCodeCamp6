@@ -38,12 +38,13 @@ function Login(props) {
 
     };
 
+  
     return (
         <div className="main">
-            <Layout className='mainLayout'>
-                <Header>
-                    <AppHeader />
-                </Header>
+            <Layout className='mainLayout1'>
+                {/* <Header>
+                    {contentHeader}
+                </Header> */}
                 <Content style={{ backgroundColor: "#F5F5DC" }}>
                     <div className='From-box'>
                         <Row justify="center">
@@ -78,7 +79,7 @@ function Login(props) {
                                         </Form.Item>
                                         <Row justify="space-around">
                                             <Col xs={8} sm={6} md={6} lg={6} xl={6} xxl={6} >
-                                                <Button style={{ width: "100%"}} className="Button" type="primary" htmlType="submit">
+                                                <Button style={{ width: "100%" }} className="Button" type="primary" htmlType="submit">
                                                     Login
                                         </Button>
                                             </Col>
@@ -96,9 +97,9 @@ function Login(props) {
                     </div>
                     <div style={{ marginTop: '7vh' }} />
                 </Content>
-                <Footer>
-                    <AppFooter />
-                </Footer>
+                {/* <Footer style={{width : '100%'}}>
+                    {contentFooter}
+                </Footer> */}
             </Layout>
         </div >
     );

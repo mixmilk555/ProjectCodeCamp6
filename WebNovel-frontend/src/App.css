@@ -15,7 +15,7 @@ body {
   overflow-x: hidden;
 }
 
-.ck-editor__editable_inline{
+.ck-editor__editable_inline {
   height: 50vh;
 }
 
@@ -37,6 +37,10 @@ body {
 
 .main {
   background-color: red;
+}
+
+.mainLayout1 {
+  height: 100vh;
 }
 
 .mainLayout .ant-layout-header {
@@ -347,6 +351,7 @@ footer
   padding: 60px 0 !important;
   text-align: center;
 }
+
 
 .footer .logo {
   font-size: 23px;
