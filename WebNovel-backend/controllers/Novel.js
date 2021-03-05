@@ -10,19 +10,35 @@ const getNovel = async (req, res) => {
 }
 const getRandomNovel = async (req, res) => {
     try {
-        const userId = await db.Novel.findAll();
+        const NovelId = await db.Novel.findAll();
         let a = [];
-        for (let k of userId) {
+        for (let k of NovelId) {
             a.push(k.dataValues.id)
         }
+        let valueItems1 = []
+        let valueItems2 = []
         function random_item(items) {
-            return items[Math.floor(Math.random() * items.length)];
+            for (let i = 0; i < 3; i++) {
+                valueItems1.push(items[Math.floor(Math.random() * items.length)]);
+                valueItems2.push(items[Math.floor(Math.random() * items.length)]);
+            }
+            // console.log(`${valueItems1}`)
+            // console.log(`${valueItems2}`)
+
+            let difference = new Set(valueItems1)
+            for (let elem of valueItems2) {
+                if (difference.has(elem)) {
+                    difference.delete(elem)
+                } else {
+                    difference.add(elem)
+                }
+            }
+            difference = Array.from(difference)
+            difference.length = 3
+            return difference
         }
         const allNovel1 = await db.Novel.findAll({ where: { id: random_item(a) } });
-        const allNovel2 = await db.Novel.findAll({ where: { id: random_item(a) } });
-        const allNovel3 = await db.Novel.findAll({ where: { id: random_item(a) } });
-        const allNovel = [...allNovel1,...allNovel2,...allNovel3]
-        res.status(200).send(allNovel)
+        res.status(200).send(allNovel1)
     } catch (err) {
         res.status(404).send("Error" + err)
     }
